@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mvi_dummy.ui.theme.PurpleGrey40
 
 @Composable
-fun InfoWithIcon(icon: ImageVector, info:String) {
+fun InfoWithIcon(icon: ImageVector, info: String) {
     Row() {
         Icon(
             icon,
@@ -23,6 +23,13 @@ fun InfoWithIcon(icon: ImageVector, info:String) {
             modifier = Modifier.padding(end = 8.dp),
             tint = PurpleGrey40
         )
-        Text(text = info, style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 18.sp, color =  Color(0xFFFFA500) ))
+        Text(
+            text = info,
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color(0xFFFFA500)
+            )
+        )
     }
 }

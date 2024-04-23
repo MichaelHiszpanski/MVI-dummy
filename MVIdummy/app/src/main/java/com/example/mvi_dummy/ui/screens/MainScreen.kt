@@ -15,22 +15,22 @@ fun MainScreen() {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val navController = rememberNavController()
-    val scrollState:ScrollState= rememberScrollState()
+    val scrollState: ScrollState = rememberScrollState()
 
     ModalDrawer(
         drawerState = drawerState,
         gesturesEnabled = true,
         drawerContent = {
 
-            DrawerContent()
+            DrawerContent(navController)
         },
         content = {
 
-            MainContent( {
+            MainContent({
                 scope.launch {
                     drawerState.open()
                 }
-            },navController,scrollState)
+            }, navController, scrollState)
         }
     )
 }

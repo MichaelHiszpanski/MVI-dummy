@@ -10,7 +10,11 @@ import androidx.navigation.NavHostController
 import com.example.mvi_dummy.utils.Navigation
 
 @Composable
-fun MainContent(onMenuClicked: () -> Unit, navController: NavHostController, scrollState: ScrollState) {
+fun MainContent(
+    onMenuClicked: () -> Unit,
+    navController: NavHostController,
+    scrollState: ScrollState
+) {
     // Main screen content
     Scaffold(
         topBar = {
@@ -22,7 +26,7 @@ fun MainContent(onMenuClicked: () -> Unit, navController: NavHostController, scr
             )
         },
 
-        ){
-        Navigation(navController =navController , scrollState =scrollState , paddingValues =it )
+        ) {
+        Navigation(navController = navController, scrollState = scrollState, paddingValues = it)
     }
 }

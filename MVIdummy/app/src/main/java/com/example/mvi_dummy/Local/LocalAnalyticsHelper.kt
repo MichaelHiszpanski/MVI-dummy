@@ -1,0 +1,9 @@
+package com.example.mvi_dummy.Local
+
+import androidx.compose.runtime.staticCompositionLocalOf
+import com.example.mvi_dummy.analytics_helper.AnalyticsHelper
+
+
+val LocalAnalyticsHelper = staticCompositionLocalOf<AnalyticsHelper> {
+    error("No AnalyticsHelper provided")
+}

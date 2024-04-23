@@ -24,7 +24,7 @@ fun CustomTopAppBar(title: String, icon: ImageVector, backgroundColor: Color, bo
                 strokeWidth = strokeWidth
             )
         },
-        backgroundColor= Color.Transparent,
+        backgroundColor = Color.Transparent,
         elevation = 0.dp
 
     )

@@ -1,24 +1,58 @@
 package com.example.mvi_dummy.ui.screens
 
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.mvi_dummy.Local.LocalAnalyticsHelper
+import com.example.mvi_dummy.R
+import com.example.mvi_dummy.ui.components.InfoWithIcon
+import com.skydoves.landscapist.coil.CoilImage
 
 @Composable
-fun LoginScreen(scrollState: ScrollState){
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp)
-        .verticalScroll(scrollState),) {
+fun LoginScreen(scrollState: ScrollState) {
+    val analyticsHelper = LocalAnalyticsHelper.current
+    analyticsHelper.logScreenTransition("Login Screen ","Home Viewed")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .verticalScroll(scrollState),
+    ) {
 
-        Text(text = "Loginl Screen",fontWeight = FontWeight.SemiBold)
+        Text(text = "Loginl Screen", fontWeight = FontWeight.SemiBold)
+        CoilImage(
+            imageModel = ImageBitmap.imageResource(R.drawable.error),
 
+            contentScale = ContentScale.Crop,
+            error = ImageBitmap.imageResource(R.drawable.error),
+
+            placeHolder = ImageBitmap.imageResource(R.drawable.brnews)
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            InfoWithIcon(Icons.Default.Edit, info = "Not Available")
+            // InfoWithIcon(Icons.Default.DateRange, info =MockData.stringToDate(article.publishedAT?:"Nothing").getTimeAgo() )
+
+        }
+        Text(text = "Not Available", fontWeight = FontWeight.Bold)
+        Text(text = "Not Available", modifier = Modifier.padding(top = 16.dp))
     }
 }
