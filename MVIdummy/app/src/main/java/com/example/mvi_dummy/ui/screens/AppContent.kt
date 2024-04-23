@@ -1,4 +1,4 @@
-package com.example.mvi_dummy
+package com.example.mvi_dummy.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
