@@ -15,7 +15,7 @@ fun CustomTopAppBar(title: String, icon: ImageVector, backgroundColor: Color, bo
     TopAppBar(
         title = { InfoWithIcon(icon = icon, info = title) },
         modifier = Modifier.drawBehind {
-            val strokeWidth = 1.dp.toPx() // Define the stroke width
+            val strokeWidth = 1.dp.toPx()
             val y = size.height - strokeWidth / 2
             drawLine(
                 SolidColor(borderColor),

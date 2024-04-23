@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
@@ -26,7 +27,12 @@ import com.skydoves.landscapist.coil.CoilImage
 @Composable
 fun LoginScreen(scrollState: ScrollState) {
     val analyticsHelper = LocalAnalyticsHelper.current
-    analyticsHelper.logScreenTransition("Login Screen ","Home Viewed")
+    DisposableEffect(analyticsHelper) {
+        analyticsHelper.logScreenTransition("Login Screen", "Home Viewed")
+
+        // No cleanup action is needed here, so just return an empty lambda
+        onDispose { }
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
