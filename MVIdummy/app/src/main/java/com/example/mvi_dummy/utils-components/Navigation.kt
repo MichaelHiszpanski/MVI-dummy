@@ -9,25 +9,22 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.mvi_dummy.ui.screens.AppContent
+import com.example.mvi_dummy.ui.screens.MainScreen
 
 @Composable
 fun Navigation(navController: NavHostController, scrollState: ScrollState,
 
                paddingValues: PaddingValues
 ) {
-    NavHost(navController = navController, startDestination ="Login"
+    NavHost(navController = navController, startDestination ="AppContent"
         , modifier = Modifier.padding(paddingValues =paddingValues )) {
 
         composable("AppContent") {
             AppContent()
         }
 
-        composable("Confirmation") {
-//            ConfirmationScreen(
-//
-//                scrollState = scrollState,
-//                navController = navController
-//            )
+        composable("MainScreen") {
+            MainScreen()
         }
 
     }
