@@ -7,13 +7,15 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
+import com.example.mvi_dummy.MVI.LoginMVI.LoginScreenViewModel
 import com.example.mvi_dummy.utils.Navigation
 
 @Composable
 fun MainContent(
     onMenuClicked: () -> Unit,
     navController: NavHostController,
-    scrollState: ScrollState
+    scrollState: ScrollState,
+    loginViewModel: LoginScreenViewModel
 ) {
     // Main screen content
     Scaffold(
@@ -27,6 +29,11 @@ fun MainContent(
         },
 
         ) {
-        Navigation(navController = navController, scrollState = scrollState, paddingValues = it)
+        Navigation(
+            navController = navController,
+            scrollState = scrollState,
+            paddingValues = it,
+            loginViewModel = loginViewModel
+        )
     }
 }

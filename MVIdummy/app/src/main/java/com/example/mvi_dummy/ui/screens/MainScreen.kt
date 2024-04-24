@@ -5,13 +5,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+
 import androidx.navigation.compose.rememberNavController
+import com.example.mvi_dummy.MVI.LoginMVI.LoginScreenViewModel
 import com.example.mvi_dummy.ui.components.DrawerContent
 import com.example.mvi_dummy.ui.components.MainContent
 import kotlinx.coroutines.launch
+//import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun MainScreen() {
+fun MainScreen(loginViewModel: LoginScreenViewModel) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val navController = rememberNavController()
@@ -19,6 +22,7 @@ fun MainScreen() {
 
     ModalDrawer(
         drawerState = drawerState,
+
         gesturesEnabled = true,
         drawerContent = {
 
@@ -30,7 +34,7 @@ fun MainScreen() {
                 scope.launch {
                     drawerState.open()
                 }
-            }, navController, scrollState)
+            }, navController, scrollState, loginViewModel)
         }
     )
 }
