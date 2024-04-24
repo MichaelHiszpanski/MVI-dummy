@@ -18,6 +18,6 @@ class AnalyticsHelper @Inject constructor() {
         Log.d("AppContent", "Button from screen: $screen is action: $action")
     }
     fun loginScreenButtonClicked(screen: String, action: String) {
-        Log.d("LoginScreen", "Transition from $screen to $action")
+        Log.d("LoginScreen", "Button from from $screen is action: $action")
     }
 }

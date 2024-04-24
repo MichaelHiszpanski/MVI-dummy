@@ -12,11 +12,13 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.example.mvi_dummy.ModelDto.CustomColors
 
 private val DarkColorScheme = darkColorScheme(
     primary = md_theme_light_primary,
@@ -48,6 +50,7 @@ private val DarkColorScheme = darkColorScheme(
     surfaceTint = md_theme_light_surfaceTint,
     outlineVariant = md_theme_light_outlineVariant,
     scrim = md_theme_light_scrim,
+
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -81,7 +84,12 @@ private val LightColorScheme = lightColorScheme(
     outlineVariant = md_theme_dark_outlineVariant,
     scrim = md_theme_dark_scrim,
 )
-
+val DefaultCustomColors = CustomColors(
+    orange = Orange200,
+    customGreen = CustomGreen,
+    customBlue = CustomBlue
+)
+val LocalCustomColor = compositionLocalOf {  DefaultCustomColors}
 @Composable
 fun MVIdummyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -98,6 +106,7 @@ fun MVIdummyTheme(
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
