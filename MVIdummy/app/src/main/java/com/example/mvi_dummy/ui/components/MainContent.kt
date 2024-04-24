@@ -15,7 +15,7 @@ fun MainContent(
     onMenuClicked: () -> Unit,
     navController: NavHostController,
     scrollState: ScrollState,
-    loginViewModel: LoginScreenViewModel
+
 ) {
     // Main screen content
     Scaffold(
@@ -33,7 +33,6 @@ fun MainContent(
             navController = navController,
             scrollState = scrollState,
             paddingValues = it,
-            loginViewModel = loginViewModel
         )
     }
 }

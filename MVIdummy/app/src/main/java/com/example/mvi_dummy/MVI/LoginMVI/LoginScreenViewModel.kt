@@ -56,14 +56,16 @@ class LoginScreenViewModel @Inject constructor(): ViewModel() {
         // TODO later
     }
     fun loadImage(context: Context) {
+        Log.d("LoginScreenViewModel 1==>","Start" )
         val imageRequest = ImageRequest.Builder(context)
-            .data("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAOxglmJbrVRHbcbUuxsgxM2Z8I14h-4igjQ&s")
+            .data("https://cdn.pixabay.com/photo/2017/07/13/19/51/sunset-2501727_960_720.png")
             .target(
                 onSuccess = { result ->
 
                     _state.value = _state.value.copy(
                         loadedImage = result.toBitmap().asImageBitmap()
                     )
+                    Log.d("LoginScreenViewModel 2==>","Start 2"+_state.value.toString() )
                 },
                 onError = { _ ->
                     _state.value = _state.value.copy(error = "Failed to load image")

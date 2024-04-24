@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 //import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun MainScreen(loginViewModel: LoginScreenViewModel) {
+fun MainScreen() {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val navController = rememberNavController()
@@ -34,7 +34,7 @@ fun MainScreen(loginViewModel: LoginScreenViewModel) {
                 scope.launch {
                     drawerState.open()
                 }
-            }, navController, scrollState, loginViewModel)
+            }, navController, scrollState)
         }
     )
 }

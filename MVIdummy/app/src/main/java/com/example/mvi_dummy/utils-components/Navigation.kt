@@ -18,7 +18,6 @@ fun Navigation(
     navController: NavHostController,
     scrollState: ScrollState,
     paddingValues: PaddingValues,
-    loginViewModel: LoginScreenViewModel
 ) {
 
     NavHost(
@@ -32,7 +31,7 @@ fun Navigation(
         }
 
         composable("LoginScreen") {
-            LoginScreen(scrollState = scrollState, loginViewModel)
+            LoginScreen(scrollState = scrollState)
         }
 
     }

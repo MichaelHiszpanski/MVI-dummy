@@ -17,13 +17,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mvi_dummy.MVI.AppContentMVI.MviIntent
 import com.example.mvi_dummy.MVI.AppContentMVI.UserViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppContent(userViewModel: UserViewModel = viewModel()) {
+fun AppContent(userViewModel: UserViewModel = hiltViewModel()) {
     val state by userViewModel.state.collectAsState()
 
     Scaffold(

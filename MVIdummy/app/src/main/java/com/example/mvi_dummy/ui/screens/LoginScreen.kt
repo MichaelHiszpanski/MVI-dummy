@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
@@ -28,15 +29,17 @@ import com.example.mvi_dummy.MVI.LoginMVI.LoginScreenViewModel
 import com.example.mvi_dummy.R
 import com.example.mvi_dummy.ui.components.InfoWithIcon
 import com.skydoves.landscapist.coil.CoilImage
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun LoginScreen(scrollState: ScrollState,loginViewModel: LoginScreenViewModel) {
-    val viewModel= LocalLoginModelView.current
+fun LoginScreen(scrollState: ScrollState,loginViewModel: LoginScreenViewModel=hiltViewModel()) {
+//    val viewModel= LocalLoginModelView.current
     val analyticsHelper = LocalAnalyticsHelper.current
+    val state = loginViewModel.state.collectAsState()
+    val loadedImage = state.value.loadedImage
     DisposableEffect(analyticsHelper) {
         analyticsHelper.logScreenTransition("Login Screen", "Home Viewed")
 
-        // No cleanup action is needed here, so just return an empty lambda
         onDispose { }
     }
     Column(
@@ -48,7 +51,7 @@ fun LoginScreen(scrollState: ScrollState,loginViewModel: LoginScreenViewModel) {
 
         Text(text = "Loginl Screen", fontWeight = FontWeight.SemiBold)
         CoilImage(
-            imageModel = ImageBitmap.imageResource(R.drawable.error),
+            imageModel = loadedImage,
 
             contentScale = ContentScale.Crop,
             error = ImageBitmap.imageResource(R.drawable.error),
@@ -67,7 +70,7 @@ fun LoginScreen(scrollState: ScrollState,loginViewModel: LoginScreenViewModel) {
         Text(text = "Not Available", fontWeight = FontWeight.Bold)
         Text(text = "Not Available", modifier = Modifier.padding(top = 16.dp))
         val context = LocalContext.current
-        Button(onClick = { viewModel.loadImage(context) }) {
+        Button(onClick = { loginViewModel.loadImage(context) }) {
             Text("Load Image")
         }
     }

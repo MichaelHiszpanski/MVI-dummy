@@ -2,12 +2,15 @@ package com.example.mvi_dummy.MVI.AppContentMVI
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UserViewModel : ViewModel() {
+@HiltViewModel
+class UserViewModel  @Inject constructor() : ViewModel() {
     private val _intents = Channel<MviIntent>(Channel.UNLIMITED)
     private val _state = MutableStateFlow(UserViewState())
     val state: StateFlow<UserViewState> = _state.asStateFlow()
