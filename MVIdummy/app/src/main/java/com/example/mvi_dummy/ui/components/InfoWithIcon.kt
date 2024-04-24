@@ -30,7 +30,7 @@ fun InfoWithIcon(icon: ImageVector, info: String) {
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp,
-                color = LocalCustomColor.current
+                color = LocalCustomColor.current.orange
             )
         )
     }
