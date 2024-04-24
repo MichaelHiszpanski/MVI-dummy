@@ -12,6 +12,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -19,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.mvi_dummy.Local.LocalAnalyticsHelper
 import com.example.mvi_dummy.MVI.AppContentMVI.MviIntent
 import com.example.mvi_dummy.MVI.AppContentMVI.UserViewModel
 
@@ -26,7 +28,12 @@ import com.example.mvi_dummy.MVI.AppContentMVI.UserViewModel
 @Composable
 fun AppContent(userViewModel: UserViewModel = hiltViewModel()) {
     val state by userViewModel.state.collectAsState()
+    val analyticsHelper = LocalAnalyticsHelper.current
+    DisposableEffect(analyticsHelper) {
+        analyticsHelper.loginHomeScreen("AppContent","First start application")
 
+        onDispose { }
+    }
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("MVI Example") })
@@ -45,7 +52,11 @@ fun AppContent(userViewModel: UserViewModel = hiltViewModel()) {
                 Text(text = state.userName ?: "No user loaded")
             }
             Button(
-                onClick = { userViewModel.processIntent(MviIntent.LoadUser) },
+                onClick = {
+                    userViewModel.processIntent(MviIntent.LoadUser)
+                    analyticsHelper.appContentButtonClicked("AppContent","Loading button is clicked ")
+
+                          },
                 modifier = Modifier.padding(top = 16.dp)
             ) {
                 Text("Load User")

@@ -10,6 +10,3 @@ val LocalAnalyticsHelper = staticCompositionLocalOf<AnalyticsHelper> {
     error("No AnalyticsHelper provided")
 }
 
-val LocalLoginModelView = compositionLocalOf<LoginScreenViewModel> {
-    error("No LoginScreenViewModel provided")
-}

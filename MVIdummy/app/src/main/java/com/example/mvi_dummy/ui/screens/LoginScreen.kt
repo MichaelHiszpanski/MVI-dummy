@@ -23,7 +23,6 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.mvi_dummy.Local.LocalAnalyticsHelper
-import com.example.mvi_dummy.Local.LocalLoginModelView
 import com.example.mvi_dummy.MVI.LoginMVI.LoginScreenIntent
 import com.example.mvi_dummy.MVI.LoginMVI.LoginScreenViewModel
 import com.example.mvi_dummy.R
@@ -32,8 +31,7 @@ import com.skydoves.landscapist.coil.CoilImage
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun LoginScreen(scrollState: ScrollState,loginViewModel: LoginScreenViewModel=hiltViewModel()) {
-//    val viewModel= LocalLoginModelView.current
+fun LoginScreen(scrollState: ScrollState, loginViewModel: LoginScreenViewModel = hiltViewModel()) {
     val analyticsHelper = LocalAnalyticsHelper.current
     val state = loginViewModel.state.collectAsState()
     val loadedImage = state.value.loadedImage
@@ -64,13 +62,12 @@ fun LoginScreen(scrollState: ScrollState,loginViewModel: LoginScreenViewModel=hi
                 .padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween
         ) {
             InfoWithIcon(Icons.Default.Edit, info = "Not Available")
-            // InfoWithIcon(Icons.Default.DateRange, info =MockData.stringToDate(article.publishedAT?:"Nothing").getTimeAgo() )
 
         }
         Text(text = "Not Available", fontWeight = FontWeight.Bold)
         Text(text = "Not Available", modifier = Modifier.padding(top = 16.dp))
         val context = LocalContext.current
-        Button(onClick = { loginViewModel.loadImage(context) }) {
+        Button(onClick = { loginViewModel.sendIntent(LoginScreenIntent.LoadImage, context) }) {
             Text("Load Image")
         }
     }
