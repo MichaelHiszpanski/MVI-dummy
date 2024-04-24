@@ -1,11 +1,14 @@
 package com.example.mvi_dummy.ui.screens
 
+import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
@@ -34,6 +37,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 fun LoginScreen(scrollState: ScrollState, loginViewModel: LoginScreenViewModel = hiltViewModel()) {
     val analyticsHelper = LocalAnalyticsHelper.current
     val state = loginViewModel.state.collectAsState()
+    Log.e("LoginScreen", state.toString())
     val loadedImage = state.value.loadedImage
     DisposableEffect(analyticsHelper) {
         analyticsHelper.logScreenTransition("Login Screen", "Home Viewed")
@@ -48,14 +52,26 @@ fun LoginScreen(scrollState: ScrollState, loginViewModel: LoginScreenViewModel =
     ) {
 
         Text(text = "Loginl Screen", fontWeight = FontWeight.SemiBold)
-        CoilImage(
-            imageModel = loadedImage,
+        state.value.loadedImage?.let { img ->
+            Image(
+                bitmap = img,
+                contentDescription = "Loaded Image",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                contentScale = ContentScale.Crop
+            )
+            CoilImage(
+                imageModel = img,
 
-            contentScale = ContentScale.Crop,
-            error = ImageBitmap.imageResource(R.drawable.error),
+                contentScale = ContentScale.Crop,
+                error = ImageBitmap.imageResource(R.drawable.error),
 
-            placeHolder = ImageBitmap.imageResource(R.drawable.brnews)
-        )
+                placeHolder = ImageBitmap.imageResource(R.drawable.brnews),
+                modifier = Modifier.fillMaxWidth().height(200.dp)
+            )
+        } ?: Text("Image not loaded")
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
