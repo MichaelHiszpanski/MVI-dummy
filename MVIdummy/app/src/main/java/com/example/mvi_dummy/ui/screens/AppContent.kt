@@ -20,6 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.mvi_dummy.DAO.User
+import com.example.mvi_dummy.DAO.UserViewModelDAO
 import com.example.mvi_dummy.Local.LocalAnalyticsHelper
 import com.example.mvi_dummy.MVI.AppContentMVI.MviIntent
 import com.example.mvi_dummy.MVI.AppContentMVI.UserViewModel
@@ -29,6 +31,8 @@ import com.example.mvi_dummy.MVI.AppContentMVI.UserViewModel
 fun AppContent(userViewModel: UserViewModel = hiltViewModel()) {
     val state by userViewModel.state.collectAsState()
     val analyticsHelper = LocalAnalyticsHelper.current
+    val viewModel: UserViewModelDAO =hiltViewModel()
+    val users by viewModel.users
     DisposableEffect(analyticsHelper) {
         analyticsHelper.loginHomeScreen("AppContent","First start application")
 
@@ -64,6 +68,18 @@ fun AppContent(userViewModel: UserViewModel = hiltViewModel()) {
             state.error?.let {
                 Text(text = it, color = MaterialTheme.colorScheme.error)
             }
+
+
+                users.forEach { user ->
+                    Text("User: ${user.name}, Age: ${user.age}")
+                }
+                Button(onClick = { viewModel.addUser(User(0, "New User", 25)) }) {
+                    Text("Add User")
+                }
+                Button(onClick = { viewModel.deleteUsers() }) {
+                    Text("Delete All Users")
+                }
+
         }
     }
 }
