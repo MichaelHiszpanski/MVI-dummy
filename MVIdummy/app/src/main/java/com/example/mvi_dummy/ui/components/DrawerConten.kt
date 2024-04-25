@@ -7,20 +7,32 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import com.example.mvi_dummy.ui.theme.Shapes
 import androidx.compose.material.Text
+import androidx.compose.material.DrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
-fun DrawerContent(navController:NavController) {
+fun DrawerContent(navController:NavController, drawerState: DrawerState, scope: CoroutineScope) {
 
     Column {
 
         Button(
             onClick = {
-                // Navigate to the LoginScreen
-                navController.navigate("LoginScreen")
+
+                scope.launch {
+                    drawerState.close()
+                    navController.navigate("LoginScreen"){
+                        popUpTo(navController.graph.startDestinationId) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
             },
             modifier = Modifier.padding(top = 16.dp)
         ) {
@@ -29,8 +41,16 @@ fun DrawerContent(navController:NavController) {
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = {
-                // Navigate to the LoginScreen
-                navController.navigate("AppContent")
+                scope.launch {
+                    drawerState.close()
+                    navController.navigate("AppContent"){
+                        popUpTo(navController.graph.startDestinationId) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
             },
             modifier = Modifier.padding(top = 16.dp),
             shape = Shapes.large

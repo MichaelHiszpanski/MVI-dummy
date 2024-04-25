@@ -13,7 +13,7 @@ import javax.inject.Inject
 class UserViewModelDAO  @Inject constructor(private val dao: UserDao) : ViewModel() {
 
 
-    // LiveData to observe users
+
     val users = mutableStateOf(listOf<User>())
 
     init {

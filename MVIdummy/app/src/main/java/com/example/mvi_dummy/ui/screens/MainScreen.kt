@@ -2,16 +2,16 @@ package com.example.mvi_dummy.ui.screens
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.*
+import androidx.compose.material.ModalDrawer
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-
 import androidx.navigation.compose.rememberNavController
-import com.example.mvi_dummy.MVI.LoginMVI.LoginScreenViewModel
+import androidx.compose.material.DrawerValue
+import androidx.compose.material.rememberDrawerState
 import com.example.mvi_dummy.ui.components.DrawerContent
 import com.example.mvi_dummy.ui.components.MainContent
 import kotlinx.coroutines.launch
-//import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 @Composable
 fun MainScreen() {
@@ -26,7 +26,7 @@ fun MainScreen() {
         gesturesEnabled = true,
         drawerContent = {
 
-            DrawerContent(navController)
+            DrawerContent(navController,drawerState,scope)
         },
         content = {
 
